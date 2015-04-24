@@ -3,6 +3,8 @@ require_relative 'lib/template'
 require_relative 'lib/cloudformation'
 require 'csv'
 
+template_path = File.expand_path("../templates", __FILE__)
+
 
 desc "Generate key pair"
 task :generate_key, [:key_name] do |_,args|
@@ -18,12 +20,12 @@ end
 
 desc "Validate the template"
 task :validate, [:stack_name] do |_,args|
-	template = Devops::Template.new.generate_json('/projects/devops/templates/base.json.erb', {name: args.stack_name})
+	template = Devops::Template.new.generate_json("#{template_path}/base.json.erb", {name: args.stack_name})
 	Devops::CloudFormation.new.validate_template(template)
 end
 
 desc "Export credentials"
-task :export_creds do 
-	exec("export AWS_ACCESS_KEY_ID=#{CSV.read('/Users/Thoughtworker/Downloads/credentials.csv')[1][1]}")
-	exec("export AWS_SECRET_ACCESS_KEY=#{CSV.read('/Users/Thoughtworker/Downloads/credentials.csv')[1][2]}")
+task :export_creds, [:access_key_id, :secret_access_key] do |_, args| 
+	exec("export AWS_ACCESS_KEY_ID=#{args.access_key_id}")
+	exec("export AWS_SECRET_ACCESS_KEY=#{args.secret_access_key}")
 end
