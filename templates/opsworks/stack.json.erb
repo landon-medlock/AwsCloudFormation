@@ -1,0 +1,11 @@
+"Stack": {
+  "Type": "AWS::OpsWorks::Stack",
+  "Properties": {
+    "DefaultInstanceProfileArn": "arn:aws:iam::457625171809:role/aws-opsworks-service-role",
+    "CustomCookbooksSource": "https://s3.amazonaws.com/hcarchives/cookbooks.tar.gz",
+    "DefaultOs": "Ubuntu 14.04 LTS",
+    "DefaultSshKeyName": "dev1",
+    "ServiceRoleArn": "arn:aws:iam::457625171809:instance-profile/HCApi",
+    "Name": "<%= name %>"
+  }
+}

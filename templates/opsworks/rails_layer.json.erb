@@ -1,0 +1,13 @@
+"RailsLayer": {
+  "Type": "AWS::OpsWorks::Layer",
+  "Properties": {
+    "AutoAssignElasticIps": true,
+    "AutoAssignPublicIps": true,
+    "CustomRecipes": "rails:setup",
+    "CustomSecurityGroupIds" :  [ "sg-4dd60029" ],
+    "Name": "Rails",
+    "Shortname": "rails",
+    "StackId": {"Ref": "Stack"},
+    "Type": "rails-app"
+  }
+}

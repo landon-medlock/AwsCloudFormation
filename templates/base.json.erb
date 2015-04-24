@@ -1,0 +1,10 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description" : "<%= name %>",
+	"Resources" : {
+	
+		<%= Devops::Template.new.generate_json('templates/opsworks/stack.json.erb', {name: name}) %>,
+		<%= Devops::Template.new.generate_json('templates/opsworks/rails_layer.json.erb', {name: name}) %>
+
+	}
+}
